@@ -123,6 +123,15 @@ public class ActiveDirectoryRealmTest {
         assertExistingUserSuffix(USERNAME + "@EXAMPLE.com", "testuser@EXAMPLE.com");
     }
 
+    @Test
+    public void testUserPrincipalNameDnSpecialCharactersEscaped() throws Exception {
+        // RFC 2253 special characters in the submitted username must be escaped, not interpreted
+        assertExistingUserSuffix(USERNAME + ",cn=admins", "testuser\\,cn\\=admins@ExAmple.COM");
+        assertExistingUserSuffix(USERNAME + "+cn=admin", "testuser\\+cn\\=admin@ExAmple.COM");
+        assertExistingUserSuffix(USERNAME + ";ou=admins@example.com", "testuser\\;ou\\=admins@example.com");
+        assertExistingUserSuffix("\"" + USERNAME + "\"", "\\\"testuser\\\"@ExAmple.COM");
+    }
+
     public void assertExistingUserSuffix(String username, String expectedPrincipalName) throws Exception {
 
         LdapContext ldapContext = createMock(LdapContext.class);
