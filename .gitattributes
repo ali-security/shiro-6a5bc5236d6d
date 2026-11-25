@@ -17,3 +17,4 @@
 
 # CRLF source file: diff as binary so its line endings are preserved byte-for-byte
 /core/src/main/java/org/apache/shiro/realm/ldap/DefaultLdapRealm.java -diff
+/core/src/test/java/org/apache/shiro/realm/ldap/DefaultLdapRealmTest.java -diff
